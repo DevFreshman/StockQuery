@@ -1,4 +1,4 @@
-package StockQuery.demo.dto.response;
+package stockquery.demo.dto.response;
 
 import java.util.List;
 

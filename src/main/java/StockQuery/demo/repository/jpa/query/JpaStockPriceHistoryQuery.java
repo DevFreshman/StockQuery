@@ -1,4 +1,4 @@
-package StockQuery.demo.repository.jpa.query;
+package stockquery.demo.repository.jpa.query;
 
 import java.time.LocalDate;
 
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import StockQuery.demo.dto.response.TopGainerOrLosers;
-import StockQuery.demo.dto.response.VolumeSpikeResponse;
-import StockQuery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.dto.response.TopGainerOrLosers;
+import stockquery.demo.dto.response.VolumeSpikeResponse;
+import stockquery.demo.repository.entity.StockPriceHistory;
 
 @Repository
 public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHistory, Long>, JpaSpecificationExecutor<StockPriceHistory> {

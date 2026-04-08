@@ -1,12 +1,12 @@
-package StockQuery.demo.service;
+package stockquery.demo.service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import StockQuery.demo.dto.request.VolumeSpikeRequest;
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.VolumeSpikeResponse;
-import StockQuery.demo.repository.StockPriceHistoryRepository;
+import stockquery.demo.dto.request.VolumeSpikeRequest;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.VolumeSpikeResponse;
+import stockquery.demo.repository.StockPriceHistoryRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

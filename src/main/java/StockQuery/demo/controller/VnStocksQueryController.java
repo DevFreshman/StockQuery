@@ -1,23 +1,23 @@
-package StockQuery.demo.controller;
+package stockquery.demo.controller;
 
-import StockQuery.demo.service.VolumeAnalysisService;
+import stockquery.demo.service.VolumeAnalysisService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import StockQuery.demo.dto.request.CompanyFilter;
-import StockQuery.demo.dto.request.StockPriceHistoryFilter;
-import StockQuery.demo.dto.request.VolumeSpikeRequest;
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.SectorPerfomance;
-import StockQuery.demo.dto.response.TopGainerOrLosers;
-import StockQuery.demo.dto.response.VolumeSpikeResponse;
-import StockQuery.demo.repository.entity.Company;
-import StockQuery.demo.repository.entity.StockPriceHistory;
-import StockQuery.demo.service.CompanyService;
-import StockQuery.demo.service.SectorPerformanceService;
-import StockQuery.demo.service.StockPriceHistoryService;
-import StockQuery.demo.service.MarketRankingService;
+import stockquery.demo.dto.request.CompanyFilter;
+import stockquery.demo.dto.request.StockPriceHistoryFilter;
+import stockquery.demo.dto.request.VolumeSpikeRequest;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.SectorPerfomance;
+import stockquery.demo.dto.response.TopGainerOrLosers;
+import stockquery.demo.dto.response.VolumeSpikeResponse;
+import stockquery.demo.repository.entity.Company;
+import stockquery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.service.CompanyService;
+import stockquery.demo.service.SectorPerformanceService;
+import stockquery.demo.service.StockPriceHistoryService;
+import stockquery.demo.service.MarketRankingService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.PageRequest;

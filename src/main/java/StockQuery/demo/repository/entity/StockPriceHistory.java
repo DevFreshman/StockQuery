@@ -1,4 +1,4 @@
-package StockQuery.demo.repository.entity;
+package stockquery.demo.repository.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

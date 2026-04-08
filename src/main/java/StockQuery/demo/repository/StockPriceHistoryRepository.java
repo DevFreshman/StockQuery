@@ -1,13 +1,13 @@
-package StockQuery.demo.repository;
+package stockquery.demo.repository;
 
 import org.springframework.data.domain.PageRequest;
 
-import StockQuery.demo.dto.request.StockPriceHistoryFilter;
-import StockQuery.demo.dto.request.VolumeSpikeRequest;
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.TopGainerOrLosers;
-import StockQuery.demo.dto.response.VolumeSpikeResponse;
-import StockQuery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.dto.request.StockPriceHistoryFilter;
+import stockquery.demo.dto.request.VolumeSpikeRequest;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.TopGainerOrLosers;
+import stockquery.demo.dto.response.VolumeSpikeResponse;
+import stockquery.demo.repository.entity.StockPriceHistory;
 
 public interface StockPriceHistoryRepository {
     PageResult<StockPriceHistory> getListByFilter(PageRequest pageRequest, StockPriceHistoryFilter filter);

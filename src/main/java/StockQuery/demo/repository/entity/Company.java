@@ -1,9 +1,11 @@
-package StockQuery.demo.repository.entity;
+package stockquery.demo.repository.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "companies")
 @NoArgsConstructor
 @Getter
+@Builder
+@AllArgsConstructor
 public class Company {
 
     @Id

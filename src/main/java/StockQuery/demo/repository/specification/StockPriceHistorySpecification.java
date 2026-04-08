@@ -1,4 +1,4 @@
-package StockQuery.demo.repository.specification;
+package stockquery.demo.repository.specification;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import StockQuery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.repository.entity.StockPriceHistory;
 
 
 @Component

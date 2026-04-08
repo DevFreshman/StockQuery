@@ -1,4 +1,4 @@
-package StockQuery.demo.dto.request;
+package stockquery.demo.dto.request;
 
 public record CompanyFilter(
     String ticker,

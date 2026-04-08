@@ -1,19 +1,19 @@
-package StockQuery.demo.repository.impl;
+package stockquery.demo.repository.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
-import StockQuery.demo.dto.request.StockPriceHistoryFilter;
-import StockQuery.demo.dto.request.VolumeSpikeRequest;
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.TopGainerOrLosers;
-import StockQuery.demo.dto.response.VolumeSpikeResponse;
-import StockQuery.demo.repository.StockPriceHistoryRepository;
-import StockQuery.demo.repository.entity.StockPriceHistory;
-import StockQuery.demo.repository.jpa.query.JpaStockPriceHistoryQuery;
-import StockQuery.demo.repository.specification.StockPriceHistorySpecification;
+import stockquery.demo.dto.request.StockPriceHistoryFilter;
+import stockquery.demo.dto.request.VolumeSpikeRequest;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.TopGainerOrLosers;
+import stockquery.demo.dto.response.VolumeSpikeResponse;
+import stockquery.demo.repository.StockPriceHistoryRepository;
+import stockquery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.repository.jpa.query.JpaStockPriceHistoryQuery;
+import stockquery.demo.repository.specification.StockPriceHistorySpecification;
 import lombok.RequiredArgsConstructor;
 
 

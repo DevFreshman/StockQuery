@@ -1,9 +1,9 @@
-package StockQuery.demo.repository.specification;
+package stockquery.demo.repository.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import StockQuery.demo.repository.entity.Company;
+import stockquery.demo.repository.entity.Company;
 
 @Component
 public class CompaniesSpecification {

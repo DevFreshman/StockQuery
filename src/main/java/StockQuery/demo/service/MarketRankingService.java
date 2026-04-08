@@ -1,11 +1,11 @@
-package StockQuery.demo.service;
+package stockquery.demo.service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.TopGainerOrLosers;
-import StockQuery.demo.repository.StockPriceHistoryRepository;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.TopGainerOrLosers;
+import stockquery.demo.repository.StockPriceHistoryRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

@@ -1,4 +1,4 @@
-package StockQuery.demo.repository.jpa.query;
+package stockquery.demo.repository.jpa.query;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import StockQuery.demo.dto.response.SectorPerfomance;
-import StockQuery.demo.repository.entity.Company;
+import stockquery.demo.dto.response.SectorPerfomance;
+import stockquery.demo.repository.entity.Company;
 
 @Repository
 public interface JpaCompaniesQuery extends JpaRepository<Company, String>,JpaSpecificationExecutor<Company> {
@@ -40,4 +40,6 @@ public interface JpaCompaniesQuery extends JpaRepository<Company, String>,JpaSpe
         """, nativeQuery = true
     )
     Page<SectorPerfomance> findSectorPerformance(Pageable pageable);
+
+    boolean existsByTicker(String ticker);
 }

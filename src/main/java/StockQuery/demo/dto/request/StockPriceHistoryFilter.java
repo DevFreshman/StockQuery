@@ -1,4 +1,4 @@
-package StockQuery.demo.dto.request;
+package stockquery.demo.dto.request;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

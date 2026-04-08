@@ -1,17 +1,18 @@
-package StockQuery.demo.repository.impl;
+package stockquery.demo.repository.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
-import StockQuery.demo.dto.request.CompanyFilter;
-import StockQuery.demo.dto.response.PageResult;
-import StockQuery.demo.dto.response.SectorPerfomance;
-import StockQuery.demo.repository.CompaniesRepository;
-import StockQuery.demo.repository.entity.Company;
-import StockQuery.demo.repository.jpa.query.JpaCompaniesQuery;
-import StockQuery.demo.repository.specification.CompaniesSpecification;
+import stockquery.demo.dto.request.CompanyFilter;
+import stockquery.demo.dto.response.PageResult;
+import stockquery.demo.dto.response.SectorPerfomance;
+import stockquery.demo.repository.CompaniesRepository;
+import stockquery.demo.repository.entity.Company;
+import stockquery.demo.repository.jpa.command.JpaCompaniesCommand;
+import stockquery.demo.repository.jpa.query.JpaCompaniesQuery;
+import stockquery.demo.repository.specification.CompaniesSpecification;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class CompaniesRepositoryImpl implements CompaniesRepository {
 
     private final JpaCompaniesQuery jpaQuery;
+    private final JpaCompaniesCommand jpaCommand;
 
     @Override
     public PageResult<Company> getListByFilter(PageRequest pageRequest, CompanyFilter filter) {
@@ -48,6 +50,16 @@ public class CompaniesRepositoryImpl implements CompaniesRepository {
             page.getSize(), 
             page.getTotalElements(), 
             page.getTotalPages());
+    }
+
+    @Override
+    public boolean isTickerExists(String ticker) {
+        return jpaQuery.existsByTicker(ticker);
+    }
+
+    @Override
+    public Company save(Company company) {
+        return jpaCommand.save(company);
     }
 
 }
