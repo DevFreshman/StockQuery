@@ -140,5 +140,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
         @Param("date") LocalDate date, 
         @Param("baselineDays") int baselineDays, 
         @Param("spikeThreshold") double spikeThreshold);
+    
 
+    boolean existsByTickerAndTradeDate(String ticker, LocalDate tradeDate);
 }

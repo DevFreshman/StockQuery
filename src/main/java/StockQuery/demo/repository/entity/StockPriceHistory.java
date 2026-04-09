@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +19,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "hs_stock_prices")
 @NoArgsConstructor
 @Getter
+@Builder
+@AllArgsConstructor
 public class StockPriceHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hs_stock_prices_seq")

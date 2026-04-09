@@ -1,5 +1,7 @@
 package stockquery.demo.repository.impl;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,6 +14,7 @@ import stockquery.demo.dto.response.TopGainerOrLosers;
 import stockquery.demo.dto.response.VolumeSpikeResponse;
 import stockquery.demo.repository.StockPriceHistoryRepository;
 import stockquery.demo.repository.entity.StockPriceHistory;
+import stockquery.demo.repository.jpa.JpaStockPriceHistoryCommand;
 import stockquery.demo.repository.jpa.query.JpaStockPriceHistoryQuery;
 import stockquery.demo.repository.specification.StockPriceHistorySpecification;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class StockPriceHistoryRepositoryImpl implements StockPriceHistoryRepository {
 
     private final JpaStockPriceHistoryQuery jpaStockPriceHistoryQuery;
+    private final JpaStockPriceHistoryCommand jpaStockPriceHistoryCommand;
 
     @Override
     public PageResult<StockPriceHistory> getListByFilter(PageRequest pageRequest, StockPriceHistoryFilter filter) {
@@ -62,6 +66,16 @@ public class StockPriceHistoryRepositoryImpl implements StockPriceHistoryReposit
     public PageResult<VolumeSpikeResponse> getVolumeSpikes(PageRequest pageRequest, VolumeSpikeRequest request) {
         Page<VolumeSpikeResponse> page = jpaStockPriceHistoryQuery.findVolumeSpikesByDate(pageRequest, request.date(), request.baselineDays(), request.spikeThreshold());
         return new PageResult<VolumeSpikeResponse>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+    }
+
+    @Override
+    public StockPriceHistory save(StockPriceHistory stockPriceHistory) {
+        return jpaStockPriceHistoryCommand.save(stockPriceHistory);
+    }
+
+    @Override
+    public boolean isHistoryExists(String ticker, LocalDate tradeDate) {
+        return jpaStockPriceHistoryQuery.existsByTickerAndTradeDate(ticker, tradeDate);
     }
 
 }

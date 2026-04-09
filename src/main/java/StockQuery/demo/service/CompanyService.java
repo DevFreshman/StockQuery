@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import stockquery.demo.dto.request.CompanyFilter;
+import stockquery.demo.dto.response.CompanyResponse;
 import stockquery.demo.dto.response.PageResult;
 import stockquery.demo.exception.TickerIsExistsException;
 import stockquery.demo.repository.CompaniesRepository;
@@ -22,9 +23,10 @@ public class CompanyService {
 
 
     @Transactional
-    public Company createCompany(
+    public CompanyResponse importTicker(
         String ticker,
         String name,
+        String exchange,
         String sector,
         String industry
     ) {
@@ -35,9 +37,18 @@ public class CompanyService {
         Company company = Company.builder()
             .ticker(ticker)
             .companyName(name)
+            .exchange(exchange)
             .sector(sector)
             .industry(industry)
             .build();
-        return repository.save(company);
+        repository.save(company);
+
+        return new CompanyResponse(
+            company.getTicker(),
+            company.getCompanyName(),
+            company.getExchange(),
+            company.getSector(),
+            company.getIndustry()
+        );
     }
 }
