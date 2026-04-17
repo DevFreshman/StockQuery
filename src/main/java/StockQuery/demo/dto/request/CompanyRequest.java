@@ -1,15 +1,16 @@
 package stockquery.demo.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
+/*
+    * CompanyRequest is a record that represents the request body for creating a company.
+ */
 public record CompanyRequest(
-    @NotBlank @NotEmpty @NotNull String ticker,
-    String companyName,
-    String exchange,
-    String sector,
-    String industry
+    @NotBlank String ticker,
+    @NotBlank String companyName,
+    @NotBlank String exchange,
+    @NotBlank String sector,
+    @NotBlank String industry
 ) {
 
 }

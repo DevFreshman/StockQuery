@@ -8,13 +8,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import stockquery.demo.dto.request.StockPriceHistoryFilter;
-import stockquery.demo.dto.request.VolumeSpikeRequest;
 import stockquery.demo.dto.response.PageResult;
 import stockquery.demo.dto.response.TopGainerOrLosers;
 import stockquery.demo.dto.response.VolumeSpikeResponse;
 import stockquery.demo.repository.StockPriceHistoryRepository;
 import stockquery.demo.repository.entity.StockPriceHistory;
-import stockquery.demo.repository.jpa.JpaStockPriceHistoryCommand;
+import stockquery.demo.repository.jpa.command.JpaStockPriceHistoryCommand;
 import stockquery.demo.repository.jpa.query.JpaStockPriceHistoryQuery;
 import stockquery.demo.repository.specification.StockPriceHistorySpecification;
 import lombok.RequiredArgsConstructor;
@@ -47,30 +46,30 @@ public class StockPriceHistoryRepositoryImpl implements StockPriceHistoryReposit
 
         Page<StockPriceHistory> page = jpaStockPriceHistoryQuery.findAll(specification, pageRequest);
         
-        return new PageResult<StockPriceHistory>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+        return new PageResult<>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 
     @Override
     public PageResult<TopGainerOrLosers> getTopGainers(PageRequest pageRequest) {
         Page<TopGainerOrLosers> page = jpaStockPriceHistoryQuery.findTopGainers(pageRequest);
-        return new PageResult<TopGainerOrLosers>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+        return new PageResult<>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 
     @Override
     public PageResult<TopGainerOrLosers> getTopLosers(PageRequest pageRequest) {
         Page<TopGainerOrLosers> page = jpaStockPriceHistoryQuery.findTopLosers(pageRequest);
-        return new PageResult<TopGainerOrLosers>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+        return new PageResult<>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 
     @Override
-    public PageResult<VolumeSpikeResponse> getVolumeSpikes(PageRequest pageRequest, VolumeSpikeRequest request) {
-        Page<VolumeSpikeResponse> page = jpaStockPriceHistoryQuery.findVolumeSpikesByDate(pageRequest, request.date(), request.baselineDays(), request.spikeThreshold());
-        return new PageResult<VolumeSpikeResponse>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+    public PageResult<VolumeSpikeResponse> getVolumeSpikes(PageRequest pageRequest, LocalDate date, int baselineDays, double spikeThreshold) {
+        Page<VolumeSpikeResponse> page = jpaStockPriceHistoryQuery.findVolumeSpikesByDate(pageRequest, date, baselineDays, spikeThreshold);
+        return new PageResult<>(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 
     @Override
-    public StockPriceHistory save(StockPriceHistory stockPriceHistory) {
-        return jpaStockPriceHistoryCommand.save(stockPriceHistory);
+    public void save(StockPriceHistory stockPriceHistory) {
+        jpaStockPriceHistoryCommand.save(stockPriceHistory);
     }
 
     @Override

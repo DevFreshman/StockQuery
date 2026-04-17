@@ -1,4 +1,4 @@
-package stockquery.demo.repository.jpa;
+package stockquery.demo.repository.jpa.command;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

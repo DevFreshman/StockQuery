@@ -58,8 +58,8 @@ public class CompaniesRepositoryImpl implements CompaniesRepository {
     }
 
     @Override
-    public Company save(Company company) {
-        return jpaCommand.save(company);
+    public void save(Company company) {
+         jpaCommand.save(company);
     }
 
 }

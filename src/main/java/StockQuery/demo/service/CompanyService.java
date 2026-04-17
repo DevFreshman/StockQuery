@@ -31,8 +31,7 @@ public class CompanyService {
         String industry
     ) {
         if (repository.isTickerExists(ticker)) {
-            throw new TickerIsExistsException("Ticker " + ticker + " already exists");
-        }
+            throw new TickerIsExistsException("Ticker " + ticker + " already exists", ticker);        }
 
         Company company = Company.builder()
             .ticker(ticker)

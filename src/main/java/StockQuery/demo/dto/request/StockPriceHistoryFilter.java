@@ -13,7 +13,7 @@ public record StockPriceHistoryFilter(
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate tradeDateTo,
-        
+
     BigDecimal openPriceGreaterThan,
         
     BigDecimal openPriceLessThan,

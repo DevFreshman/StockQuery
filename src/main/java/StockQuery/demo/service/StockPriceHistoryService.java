@@ -36,7 +36,7 @@ public class StockPriceHistoryService {
             BigDecimal volume
     ) {
         if (repository.isHistoryExists(ticker, tradeDate)) {
-            throw new HistoryIsExistsException("history of ticker " + ticker + " on date " + tradeDate + " already exists");
+            throw new HistoryIsExistsException("history of ticker " + ticker + " on date " + tradeDate + " already exists", ticker, tradeDate);
         }
 
         StockPriceHistory stockPriceHistory = StockPriceHistory.builder()

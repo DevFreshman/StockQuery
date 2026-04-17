@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.springframework.data.domain.PageRequest;
 
 import stockquery.demo.dto.request.StockPriceHistoryFilter;
-import stockquery.demo.dto.request.VolumeSpikeRequest;
 import stockquery.demo.dto.response.PageResult;
 import stockquery.demo.dto.response.TopGainerOrLosers;
 import stockquery.demo.dto.response.VolumeSpikeResponse;
@@ -18,9 +17,9 @@ public interface StockPriceHistoryRepository {
 
     PageResult<TopGainerOrLosers> getTopLosers(PageRequest pageRequest);
 
-    PageResult<VolumeSpikeResponse> getVolumeSpikes(PageRequest pageRequest, VolumeSpikeRequest request);
+    PageResult<VolumeSpikeResponse> getVolumeSpikes(PageRequest pageRequest, LocalDate date, int baselineDays, double spikeThreshold);
 
-    StockPriceHistory save(StockPriceHistory stockPriceHistory);
+    void save(StockPriceHistory stockPriceHistory);
 
     boolean isHistoryExists(String ticker, LocalDate tradeDate);
 }

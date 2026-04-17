@@ -14,5 +14,5 @@ public interface CompaniesRepository {
 
     boolean isTickerExists(String ticker);
 
-    Company save(Company company);
+    void save(Company company);
 }

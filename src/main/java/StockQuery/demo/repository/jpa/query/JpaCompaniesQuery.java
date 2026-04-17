@@ -26,7 +26,7 @@ public interface JpaCompaniesQuery extends JpaRepository<Company, String>,JpaSpe
                 2) AS pct_change
             FROM hs_stock_prices
         )
-        SELECT 
+        SELECT
             c.sector,
             COUNT(DISTINCT tb.ticker)      AS num_tickers,
             COUNT(tb.pct_change)           AS num_days_calculated,

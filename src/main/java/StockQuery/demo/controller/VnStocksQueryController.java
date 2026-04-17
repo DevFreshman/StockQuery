@@ -1,5 +1,7 @@
 package stockquery.demo.controller;
 
+import jakarta.validation.Valid;
+import stockquery.demo.dto.response.ApiResponse;
 import stockquery.demo.service.VolumeAnalysisService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,61 +40,61 @@ public class VnStocksQueryController {
     private final VolumeAnalysisService volumeAnalysisService;
 
     @GetMapping("/stock-price")
-    public ResponseEntity<PageResult<StockPriceHistory>> getStockPriceList(
-        @ModelAttribute StockPriceHistoryFilter filter, 
+    public ResponseEntity<ApiResponse<PageResult<StockPriceHistory>>> getStockPriceList(
+        @Valid @ModelAttribute StockPriceHistoryFilter filter,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size) {
         
         PageResult<StockPriceHistory> result = stockPriceHistoryService.findHistory(PageRequest.of(page, size), filter);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
 
     @GetMapping("/companies")
-    public ResponseEntity<PageResult<Company>> getCompaniesList(
-        @ModelAttribute CompanyFilter filter,
+    public ResponseEntity<ApiResponse<PageResult<Company>>> getCompaniesList(
+        @Valid @ModelAttribute CompanyFilter filter,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size) {
 
         PageResult<Company> result = companyService.findCompanies(PageRequest.of(page, size), filter);
 
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
 
     @GetMapping("/performance/sector")
-    public ResponseEntity<PageResult<SectorPerfomance>> getIndustryPerformance(
+    public ResponseEntity<ApiResponse<PageResult<SectorPerfomance>>> getIndustryPerformance(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size) {
 
         PageResult<SectorPerfomance> result = sectorPerformanceService.findSectorPerformance(PageRequest.of(page, size));
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
     
     @GetMapping("/top/gainer")
-    public ResponseEntity<PageResult<TopGainerOrLosers>> getTopGainers(
+    public ResponseEntity<ApiResponse<PageResult<TopGainerOrLosers>>> getTopGainers(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size
     ) {
         PageResult<TopGainerOrLosers> result = marketRankingService.findTopGainers(PageRequest.of(page, size));
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
 
     @GetMapping("/top/loser")
-    public ResponseEntity<PageResult<TopGainerOrLosers>> getTopLosers(
+    public ResponseEntity<ApiResponse<PageResult<TopGainerOrLosers>>> getTopLosers(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size
     ) {
         PageResult<TopGainerOrLosers> result = marketRankingService.findTopLosers(PageRequest.of(page, size));
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
     
     @GetMapping("/volume/spikes")
-    public ResponseEntity<PageResult<VolumeSpikeResponse>> getVolumeSpikes(
+    public ResponseEntity<ApiResponse<PageResult<VolumeSpikeResponse>>> getVolumeSpikes(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size,
-        @ModelAttribute VolumeSpikeRequest request
+        @Valid @ModelAttribute VolumeSpikeRequest request
     ) {
-        PageResult<VolumeSpikeResponse> result = volumeAnalysisService.findVolumeSpikes(PageRequest.of(page, size), request);
-        return ResponseEntity.ok(result);
+        PageResult<VolumeSpikeResponse> result = volumeAnalysisService.findVolumeSpikes(PageRequest.of(page, size), request.date(), request.baselineDays(), request.spikeThreshold());
+        return ResponseEntity.ok(ApiResponse.success("success", result));
     }
     
     

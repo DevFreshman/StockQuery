@@ -1,10 +1,13 @@
 package stockquery.demo.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import stockquery.demo.dto.response.ApiResponse;
 import stockquery.demo.dto.request.CompanyHistoryRequest;
 import stockquery.demo.dto.request.CompanyRequest;
 import stockquery.demo.dto.response.CompanyHistoryResponse;
@@ -26,7 +29,7 @@ public class VnStocksCommandController {
     private final StockPriceHistoryService stockPriceHistoryService;
 
     @PostMapping("/import/ticker")
-    public ResponseEntity<CompanyResponse> importTicker(@RequestBody CompanyRequest request) {
+    public ResponseEntity<ApiResponse<CompanyResponse>> importTicker(@Valid @RequestBody CompanyRequest request) {
         CompanyResponse response = companyService.importTicker(
             request.ticker(), 
             request.companyName(), 
@@ -34,11 +37,12 @@ public class VnStocksCommandController {
             request.sector(), 
             request.industry()
         );
-        return ResponseEntity.ok(response);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("created successfully",response));
     }
 
     @PostMapping("/import/ticker/{ticker}/history")
-    public ResponseEntity<CompanyHistoryResponse> postMethodName(@PathParam("ticker") String ticker, @RequestBody CompanyHistoryRequest request) {
+    public ResponseEntity<ApiResponse<CompanyHistoryResponse>> postMethodName(@PathParam("ticker") String ticker, @Valid @RequestBody CompanyHistoryRequest request) {
         CompanyHistoryResponse response = stockPriceHistoryService.importTransactionHistory(
             ticker,
             request.tradeDate(),
@@ -48,7 +52,7 @@ public class VnStocksCommandController {
             request.closePrice(),
             request.volume()
         );
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("created successfully",response));
     }
     
     

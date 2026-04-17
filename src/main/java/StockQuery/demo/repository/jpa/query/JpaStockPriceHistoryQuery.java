@@ -124,7 +124,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
         AND sp.trade_date = b.trade_date
     WHERE sp.trade_date = :date
     order by spike_ratio desc;
-        """,
+    """,
     countQuery = """
         SELECT COUNT(*) 
         FROM (
