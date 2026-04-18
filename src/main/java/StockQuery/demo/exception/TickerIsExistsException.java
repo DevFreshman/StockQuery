@@ -1,7 +1,7 @@
 package stockquery.demo.exception;
 
 public class TickerIsExistsException extends RuntimeException {
-    String ticker;
+    final String ticker;
     public TickerIsExistsException(String message, String ticker) {
         super(message);
         this.ticker = ticker;

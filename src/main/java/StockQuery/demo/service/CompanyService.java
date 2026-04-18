@@ -1,5 +1,6 @@
 package stockquery.demo.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +13,14 @@ import stockquery.demo.repository.CompaniesRepository;
 import stockquery.demo.repository.entity.Company;
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CompanyService {
     private final CompaniesRepository repository;
 
     public PageResult<Company> findCompanies(PageRequest pageRequest, CompanyFilter filter) {
+        log.info("findCompanies: filter={}", filter);
         return repository.getListByFilter(pageRequest, filter);
     }
 
@@ -30,8 +33,10 @@ public class CompanyService {
         String sector,
         String industry
     ) {
+        log.info("importTicker: ticker={}, name={}, exchange={}, sector={}, industry={}", ticker, name, exchange, sector, industry);
         if (repository.isTickerExists(ticker)) {
-            throw new TickerIsExistsException("Ticker " + ticker + " already exists", ticker);        }
+            throw new TickerIsExistsException("Ticker " + ticker + " already exists", ticker);
+        }
 
         Company company = Company.builder()
             .ticker(ticker)
@@ -41,7 +46,7 @@ public class CompanyService {
             .industry(industry)
             .build();
         repository.save(company);
-
+        log.info("Ticker imported successfully: ticker={}", ticker);
         return new CompanyResponse(
             company.getTicker(),
             company.getCompanyName(),

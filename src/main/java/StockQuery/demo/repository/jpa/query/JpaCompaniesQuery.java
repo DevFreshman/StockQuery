@@ -37,7 +37,9 @@ public interface JpaCompaniesQuery extends JpaRepository<Company, String>,JpaSpe
         LEFT JOIN tb_changes tb ON c.ticker = tb.ticker
         GROUP BY c.sector
         ORDER BY avg_daily_pct_change DESC
-        """, nativeQuery = true
+        """,
+            countQuery = "SELECT COUNT(*) FROM companies GROUP BY sector",
+            nativeQuery = true
     )
     Page<SectorPerfomance> findSectorPerformance(Pageable pageable);
 

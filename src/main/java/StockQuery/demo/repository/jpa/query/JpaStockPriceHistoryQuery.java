@@ -21,7 +21,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
     value = """
 
     WITH ranked AS (
-    SELECT 
+    SELECT
         ticker,
         trade_date,
         close_price,
@@ -30,7 +30,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
         ROW_NUMBER()        OVER (PARTITION BY ticker ORDER BY trade_date DESC) AS rn
     FROM hs_stock_prices
     )
-    SELECT 
+    SELECT
         ticker,
         trade_date AS latest_date,
         close_price AS latest_close,
@@ -42,9 +42,9 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
     WHERE rn = 1 and prev_close IS NOT NULL
     ORDER BY pct_change DESC
 
-        """,
+    """,
     countQuery = """
-        SELECT COUNT(*) 
+        SELECT COUNT(*)
         FROM (
             SELECT ticker
             FROM hs_stock_prices
@@ -61,7 +61,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
     value = """
 
     WITH ranked AS (
-    SELECT 
+    SELECT
         ticker,
         trade_date,
         close_price,
@@ -70,7 +70,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
         ROW_NUMBER()        OVER (PARTITION BY ticker ORDER BY trade_date DESC) AS rn
     FROM hs_stock_prices
     )
-    SELECT 
+    SELECT
         ticker,
         trade_date AS latest_date,
         close_price AS latest_close,
@@ -80,11 +80,10 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
         ROUND((close_price - prev_close) / NULLIF(prev_close, 0) * 100, 2) AS pct_change
     FROM ranked
     WHERE rn = 1 and prev_close IS NOT NULL
-    ORDER BY pct_change ASC
-
-        """,
+    ORDER BY pct_change
+   """,
     countQuery = """
-        SELECT COUNT(*) 
+        SELECT COUNT(*)
         FROM (
             SELECT ticker
             FROM hs_stock_prices
@@ -126,7 +125,7 @@ public interface JpaStockPriceHistoryQuery extends JpaRepository<StockPriceHisto
     order by spike_ratio desc;
     """,
     countQuery = """
-        SELECT COUNT(*) 
+        SELECT COUNT(*)
         FROM (
             SELECT ticker
             FROM hs_stock_prices
